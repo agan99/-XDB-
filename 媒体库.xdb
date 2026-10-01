@@ -1,0 +1,192 @@
+{
+  "source": "file",
+  "fields": [
+    {
+      "name": "作品大类",
+      "type": "text"
+    },
+    {
+      "name": "数据来源",
+      "type": "text"
+    },
+    {
+      "name": "name",
+      "type": "text"
+    },
+    {
+      "name": "description",
+      "type": "text"
+    },
+    {
+      "name": "中文名",
+      "type": "text"
+    },
+    {
+      "name": "原名",
+      "type": "text"
+    },
+    {
+      "name": "tags",
+      "type": "multi-select"
+    },
+    {
+      "name": "cover",
+      "type": "text"
+    },
+    {
+      "name": "状态",
+      "type": "select",
+      "options": {
+        "items": [
+          {
+            "value": "💭 未来也许",
+            "color": "gray"
+          },
+          {
+            "value": "⏳ 待定",
+            "color": "yellow"
+          },
+          {
+            "value": "▶️ 进行中",
+            "color": "green"
+          },
+          {
+            "value": "✅ 已完成",
+            "color": "blue"
+          }
+        ]
+      }
+    },
+    {
+      "name": "个人评分",
+      "type": "number"
+    },
+    {
+      "name": "收藏",
+      "type": "boolean"
+    },
+    {
+      "name": "Bangumi评分",
+      "type": "number"
+    },
+    {
+      "name": "改编类型",
+      "type": "select",
+      "options": {
+        "items": [
+          {
+            "value": "小说改编",
+            "color": "default"
+          },
+          {
+            "value": "漫画改编",
+            "color": "default"
+          },
+          {
+            "value": "游戏改编",
+            "color": "default"
+          },
+          {
+            "value": "原创动画",
+            "color": "default"
+          }
+        ]
+      }
+    },
+    {
+      "name": "总集数",
+      "type": "number"
+    },
+    {
+      "name": "开播日期",
+      "type": "date",
+      "options": {
+        "format": "YYYY-MM-DD"
+      }
+    },
+    {
+      "name": "Media Progress",
+      "type": "agan:anime-media-progress"
+    },
+    {
+      "name": "动画卡片",
+      "type": "agan:anime-card"
+    },
+    {
+      "name": "游戏卡片",
+      "type": "agan:game-card"
+    },
+    {
+      "name": "媒体卡片",
+      "type": "agan:media-card"
+    }
+  ],
+  "filter": {
+    "id": "media-scope",
+    "type": "group",
+    "join": "and",
+    "items": [
+      {
+        "id": "media-library-folder",
+        "type": "expression",
+        "expression": "file.path.contains(\"310 媒体库\")"
+      }
+    ]
+  },
+  "views": [
+    {
+      "id": "anime-gallery",
+      "name": "动画卡片",
+      "type": "agan:anime-gallery",
+      "icon": "gallery-horizontal",
+      "visibleFields": [
+        "动画卡片"
+      ],
+      "filter": {
+        "id": "9cb4759e-9d5a-4f28-a826-71f9b68c019e",
+        "type": "group",
+        "join": "and",
+        "items": [
+          {
+            "id": "0c95169e-879c-479e-85f5-0bd5bfccafac",
+            "type": "expression",
+            "expression": "作品大类.contains(\"动画\")"
+          }
+        ]
+      }
+    },
+    {
+      "id": "4bdc26a3-ddda-4954-aeb4-5486b8359adb",
+      "name": "游戏卡片",
+      "type": "agan:game-gallery",
+      "icon": "gallery-horizontal",
+      "visibleFields": [
+        "游戏卡片"
+      ],
+      "filter": {
+        "id": "d7bf0e9c-e163-4fcb-ad4b-4ff374cff74c",
+        "type": "group",
+        "join": "and",
+        "items": [
+          {
+            "id": "b2833ef6-6b8a-4d93-bcac-7dd9a13ca793",
+            "type": "expression",
+            "expression": "作品大类.contains(\"游戏\")"
+          }
+        ]
+      }
+    },
+    {
+      "id": "agan:media-gallery",
+      "name": "总媒体库",
+      "type": "agan:media-gallery",
+      "icon": "gallery-horizontal",
+      "visibleFields": [
+        "媒体卡片"
+      ]
+    }
+  ],
+  "rootGroup": {
+    "type": "tabs"
+  }
+}
